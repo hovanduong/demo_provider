@@ -1,14 +1,10 @@
 import 'package:demo_provider/home.dart';
 import 'package:demo_provider/home_model.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 void main() {
 runApp(
-    ChangeNotifierProvider(
-      create: (context) => HomeModel(),
-      child: const MyApp(),
-    ),
+    const MyApp(),
   );}
 
 class MyApp extends StatelessWidget {
