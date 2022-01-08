@@ -1,4 +1,4 @@
-import 'package:demo_provider/home_model.dart';
+import 'package:demo_provider/home_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +12,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  // se chay vao ham nay dau tien
+  @override
+  void initState() {
+    super.initState();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<HomeModel>(
