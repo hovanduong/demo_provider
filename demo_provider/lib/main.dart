@@ -1,6 +1,7 @@
-import 'package:demo_provider/home.dart';
-import 'package:demo_provider/home_model.dart';
+import 'package:demo_provider/src/home/home.dart';
+import 'package:demo_provider/src/login/login_screen.dart';
 import 'package:flutter/material.dart';
+
 
 void main() {
 runApp(
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const LoginScreen()
     );
   }
 }

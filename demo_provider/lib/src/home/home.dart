@@ -1,6 +1,7 @@
-import 'package:demo_provider/home_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'home_model.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
