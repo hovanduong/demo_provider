@@ -41,15 +41,14 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             ElevatedButton(
               onPressed: () {
-             
-                final error =
-                    viewModel.checkValidInputEmail(inputEmailController.text);
-                if (error.isEmpty) {
-                  // router home
-                } else {
-                  // loginEmail(inputEmailController.text,inputPasswordController.text);
-                  showAlertDialog(context, error);
-                }
+                viewModel.createEmail(
+                    inputEmailController.text, inputPasswordController.text);
+                // if (error.isEmpty) {
+                //   // router home
+                // } else {
+                //   // loginEmail(inputEmailController.text,inputPasswordController.text);
+                //   showAlertDialog(context, error);
+                // }
               },
               child: const Text('Login'),
             )
