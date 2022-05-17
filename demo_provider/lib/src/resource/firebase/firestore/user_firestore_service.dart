@@ -6,7 +6,7 @@ import '../../model/user_model.dart';
 
 class UserFireStore{
     static  createUser(UserModel user) async {
-    final docUser = FirebaseFirestore.instance.collection('user').doc(user.id!);
+    final docUser = FirebaseFirestore.instance.collection(FireSotreContants.userCollection).doc(user.id!);
     await docUser.set(user.toJson());
     return user.id!;
   }
@@ -16,13 +16,17 @@ class UserFireStore{
       .orderBy('id', descending: true)
       .snapshots()
       .transform(Utils.transformer(UserModel.fromJson));
+
   static remoteUserById(String id) async {
     final docTodo =
         FirebaseFirestore.instance.collection('user').doc(id);
     await docTodo.delete();
   }
-}
 
+}
+class FireSotreContants{
+  static const userCollection='user';
+}
 
 
 class Utils {
