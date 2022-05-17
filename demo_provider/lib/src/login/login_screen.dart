@@ -1,4 +1,5 @@
 import 'package:demo_provider/src/login/login_viewmodel.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'components/input_text_from_filed.dart';
@@ -11,10 +12,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  late TextEditingController inputEmailController;
+  late TextEditingController inputEmailController, inputPasswordController;
   @override
   void initState() {
     inputEmailController = TextEditingController();
+    inputPasswordController = TextEditingController();
     super.initState();
   }
 
@@ -32,18 +34,22 @@ class _LoginScreenState extends State<LoginScreen> {
               hinteText: 'Tai khoan',
               labelText: 'Xin moi nhap tai khoan ',
             ),
-            //  const   InputWidget(
-            //       hinteText: 'Mat khau',
-            //       labelText: 'Xin moi nhap mat khau',
-            //     ),
+            InputWidget(
+              controller: inputPasswordController,
+              hinteText: 'Mat khau',
+              labelText: 'Xin moi nhap mat khau',
+            ),
             ElevatedButton(
               onPressed: () {
-               final error= viewModel.checkValidInputEmail(inputEmailController.text);
-               if(error.isEmpty){
-                 // router home
-               }else{
-                 showAlertDialog(context,error);
-               }
+             
+                final error =
+                    viewModel.checkValidInputEmail(inputEmailController.text);
+                if (error.isEmpty) {
+                  // router home
+                } else {
+                  // loginEmail(inputEmailController.text,inputPasswordController.text);
+                  showAlertDialog(context, error);
+                }
               },
               child: const Text('Login'),
             )
@@ -52,36 +58,46 @@ class _LoginScreenState extends State<LoginScreen> {
       }),
     );
   }
-  showAlertDialog(BuildContext context,String error) {
 
-  // set up the buttons
-  Widget cancelButton = TextButton(
-    child: const Text("Cancel"),
-    onPressed:  () {},
-  );
-  Widget continueButton = TextButton(
-    child:  const Text("Oke"),
-    onPressed:  () {
-    Navigator.of(context).pop(); // dismiss dialog
-    },
-  );
+  showAlertDialog(BuildContext context, String error) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: const Text("Cancel"),
+      onPressed: () {},
+    );
+    Widget continueButton = TextButton(
+      child: const Text("Oke"),
+      onPressed: () {
+        Navigator.of(context).pop(); // dismiss dialog
+      },
+    );
 
-  // set up the AlertDialog
-  AlertDialog alert = AlertDialog(
-    title: const Text("Message"),
-    content: Text('$error'),
-    actions: [
-      cancelButton,
-      continueButton,
-    ],
-  );
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: const Text("Message"),
+      content: Text('$error'),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
 
-  // show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 }
-}
+
+// loginEmail(String email, String password) async {
+//   final auth = FirebaseAuth.instance;
+//   await auth.signInWithEmailAndPassword(
+//       email: 'duong@gmail.com', password: '12345678');
+// }
+//    createEmail(String email, String password) async {
+//     final auth = FirebaseAuth.instance;
+//     await auth.createUserWithEmailAndPassword(email: 'hovnaduong@gmail.com', password: 'password123');
+//   }
